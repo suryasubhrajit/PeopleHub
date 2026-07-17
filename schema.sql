@@ -1,6 +1,6 @@
--- Create Database if not exists
-CREATE DATABASE IF NOT EXISTS people_hub;
-USE people_hub;
+-- -- Create Database if not exists (Commented out for cloud compatibility)
+-- CREATE DATABASE IF NOT EXISTS people_hub;
+-- USE people_hub;
 
 -- Table 1: departments
 CREATE TABLE IF NOT EXISTS departments (
