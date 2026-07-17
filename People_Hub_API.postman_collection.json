@@ -1,0 +1,158 @@
+{
+  "info": {
+    "name": "People Hub API",
+    "_postman_id": "people-hub-api-collection",
+    "description": "Complete API collection for the People Hub employee management system. Includes Departments, Employees, and Dashboard endpoints.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Departments",
+      "item": [
+        {
+          "name": "1. Create Department",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "http://localhost:3000/departments", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["departments"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"departmentName\": \"Finance\"\n}"
+            }
+          }
+        },
+        {
+          "name": "2. List Departments",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "http://localhost:3000/departments", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["departments"] }
+          }
+        },
+        {
+          "name": "3. Update Department",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "http://localhost:3000/departments/1", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["departments", "1"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"departmentName\": \"Engineering & Technology\"\n}"
+            }
+          }
+        },
+        {
+          "name": "4. Delete Department",
+          "request": {
+            "method": "DELETE",
+            "url": { "raw": "http://localhost:3000/departments/4", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["departments", "4"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Employees",
+      "item": [
+        {
+          "name": "1. Add Employee",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "http://localhost:3000/employees", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["employees"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employeeCode\": \"EMP005\",\n  \"fullName\": \"David Miller\",\n  \"email\": \"david.miller@example.com\",\n  \"mobile\": \"9876543219\",\n  \"departmentId\": 1,\n  \"designation\": \"Software Engineer\",\n  \"salary\": 80000.00,\n  \"status\": \"Active\"\n}"
+            }
+          }
+        },
+        {
+          "name": "2. List Employees (Search + Filter + Pagination)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:3000/employees?page=1&limit=5&search=John&departmentId=2&status=Active",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["employees"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "5" },
+                { "key": "search", "value": "John" },
+                { "key": "departmentId", "value": "2" },
+                { "key": "status", "value": "Active" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "3. Get Employee Details",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "http://localhost:3000/employees/1", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["employees", "1"] }
+          }
+        },
+        {
+          "name": "4. Update Employee",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "http://localhost:3000/employees/1", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["employees", "1"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employeeCode\": \"EMP001\",\n  \"fullName\": \"John Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"mobile\": \"9876543210\",\n  \"departmentId\": 1,\n  \"designation\": \"Lead Software Engineer\",\n  \"salary\": 105000.00,\n  \"status\": \"Active\"\n}"
+            }
+          }
+        },
+        {
+          "name": "5. Delete Employee",
+          "request": {
+            "method": "DELETE",
+            "url": { "raw": "http://localhost:3000/employees/5", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["employees", "5"] }
+          }
+        },
+        {
+          "name": "6. Activate/Deactivate Employee Status",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "http://localhost:3000/employees/1/status", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["employees", "1", "status"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Inactive\"\n}"
+            }
+          }
+        },
+        {
+          "name": "7. Export Employees CSV",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:3000/employees/export?search=John&departmentId=2&status=Active",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["employees", "export"],
+              "query": [
+                { "key": "search", "value": "John" },
+                { "key": "departmentId", "value": "2" },
+                { "key": "status", "value": "Active" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "item": [
+        {
+          "name": "1. Get Dashboard Statistics",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "http://localhost:3000/dashboard", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["dashboard"] }
+          }
+        }
+      ]
+    }
+  ]
+}
