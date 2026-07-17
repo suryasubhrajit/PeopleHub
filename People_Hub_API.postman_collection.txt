@@ -1,0 +1,109 @@
+PEOPLE HUB API REFERENCE
+=========================================
+
+-----------------------------------------
+DEPARTMENTS ENDPOINTS
+-----------------------------------------
+
+1. Create Department
+- Method: POST
+- URL: http://localhost:3000/departments
+- Body Format: JSON (raw)
+- Request Body:
+{
+  "departmentName": "Finance"
+}
+
+2. List Departments
+- Method: GET
+- URL: http://localhost:3000/departments
+
+3. Update Department
+- Method: PUT
+- URL: http://localhost:3000/departments/1
+- Body Format: JSON (raw)
+- Request Body:
+{
+  "departmentName": "Engineering & Technology"
+}
+
+4. Delete Department (Fails if employees exist, succeeds for empty department like ID 4)
+- Method: DELETE
+- URL: http://localhost:3000/departments/4
+
+
+-----------------------------------------
+EMPLOYEES ENDPOINTS
+-----------------------------------------
+
+1. Add Employee
+- Method: POST
+- URL: http://localhost:3000/employees
+- Body Format: JSON (raw)
+- Request Body:
+{
+  "employeeCode": "EMP005",
+  "fullName": "David Miller",
+  "email": "david.miller@example.com",
+  "mobile": "9876543219",
+  "departmentId": 1,
+  "designation": "Software Engineer",
+  "salary": 80000.00,
+  "status": "Active"
+}
+
+2. List Employees (With Search, Filtering & Pagination)
+- Method: GET
+- URL: http://localhost:3000/employees?page=1&limit=5&search=John&departmentId=1&status=Active
+- Query Params Explanation:
+  * page: 1
+  * limit: 5
+  * search: John
+  * departmentId: 2
+  * status: Active 
+
+3. Get Employee Details (Includes Department Name)
+- Method: GET
+- URL: http://localhost:3000/employees/1
+
+4. Update Employee
+- Method: PUT
+- URL: http://localhost:3000/employees/1
+- Body Format: JSON (raw)
+- Request Body:
+{
+  "employeeCode": "EMP001",
+  "fullName": "John Doe",
+  "email": "john.doe@example.com",
+  "mobile": "9876543210",
+  "departmentId": 1,
+  "designation": "Lead Software Engineer",
+  "salary": 105000.00,
+  "status": "Active"
+}
+
+5. Delete Employee
+- Method: DELETE
+- URL: http://localhost:3000/employees/5
+
+6. Activate/Deactivate Employee (Status Toggle)
+- Method: PATCH
+- URL: http://localhost:3000/employees/1/status
+- Body Format: JSON (raw)
+- Request Body:
+{
+  "status": "Inactive"
+}
+
+7. Export Employees Data (Downloads CSV File)
+- Method: GET
+- URL: http://localhost:3000/employees/export?search=John&departmentId=1&status=Active
+
+
+-----------------------------------------
+DASHBOARD ENDPOINTS
+-----------------------------------------
+
+1. Get Dashboard Stats
+- Method: GET
+- URL: http://localhost:3000/dashboard

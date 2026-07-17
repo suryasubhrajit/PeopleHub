@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - People Hub</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Inter', sans-serif;
+    }
+    .navbar {
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
+    }
+    .card {
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    }
+    .table-responsive {
+      border-radius: 12px;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark mb-4">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <i class="bi bi-people-fill me-2 fs-3"></i>
+        <span class="fw-bold">People Hub</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active fw-bold" href="index.html">
+              <i class="bi bi-speedometer2 me-1"></i> Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="departments.html">
+              <i class="bi bi-building me-1"></i> Departments
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="employees.html">
+              <i class="bi bi-person-badge me-1"></i> Employees
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-md-12">
+        <h2 class="fw-bold text-dark">Welcome to People Hub Dashboard</h2>
+        <p class="text-muted">High-level insights into your company structure and payroll data.</p>
+      </div>
+    </div>
+
+    <!-- Stats Counters -->
+    <div class="row g-4 mb-4">
+      <div class="col-md-4">
+        <div class="card p-3 border-start border-primary border-4 bg-white">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h6 class="text-muted text-uppercase mb-1">Total Employees</h6>
+              <h2 class="fw-bold mb-0 text-primary" id="totalEmployees">-</h2>
+            </div>
+            <div class="bg-primary-subtle text-primary rounded-circle p-3">
+              <i class="bi bi-people-fill fs-3"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card p-3 border-start border-success border-4 bg-white">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h6 class="text-muted text-uppercase mb-1">Total Departments</h6>
+              <h2 class="fw-bold mb-0 text-success" id="totalDepartments">-</h2>
+            </div>
+            <div class="bg-success-subtle text-success rounded-circle p-3">
+              <i class="bi bi-building fs-3"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card p-3 border-start border-warning border-4 bg-white">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h6 class="text-muted text-uppercase mb-1">Average Salary</h6>
+              <h2 class="fw-bold mb-0 text-warning" id="averageSalary">-</h2>
+            </div>
+            <div class="bg-warning-subtle text-warning rounded-circle p-3">
+              <i class="bi bi-cash-coin fs-3"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <!-- Department Breakdown -->
+      <div class="col-md-6">
+        <div class="card h-100 p-4">
+          <h5 class="fw-bold mb-3"><i class="bi bi-diagram-3-fill me-2 text-primary"></i>Employees by Department</h5>
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th>Department</th>
+                  <th class="text-center">Count</th>
+                </tr>
+              </thead>
+              <tbody id="departmentBreakdownBody">
+                <tr>
+                  <td colspan="2" class="text-center text-muted py-3">Loading breakdown...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Status Breakdown and Payroll Summary -->
+      <div class="col-md-6">
+        <div class="card h-100 p-4 mb-4">
+          <h5 class="fw-bold mb-3"><i class="bi bi-activity me-2 text-success"></i>Employee Status Summary</h5>
+          <ul class="list-group mb-4" id="statusBreakdownList">
+            <li class="list-group-item text-center text-muted border-0">Loading status...</li>
+          </ul>
+
+          <h5 class="fw-bold mb-3"><i class="bi bi-graph-up me-2 text-warning"></i>Payroll Overview</h5>
+          <div class="row g-2">
+            <div class="col-6">
+              <div class="bg-light p-3 rounded">
+                <span class="text-muted d-block small">Highest Salary</span>
+                <span class="fw-bold fs-5 text-dark" id="maxSalary">-</span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="bg-light p-3 rounded">
+                <span class="text-muted d-block small">Lowest Salary</span>
+                <span class="fw-bold fs-5 text-dark" id="minSalary">-</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer mt-5 py-3 bg-light border-top text-center text-muted">
+    <div class="container">
+      <small>&copy; 2026 People Hub Administration. All rights reserved.</small>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Global Dashboard App Script -->
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
